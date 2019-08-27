@@ -13,7 +13,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $usr = New User;
-        $usr->name = 'August Good';
+        $usr->fullname = 'August Good';
+        $usr->username = 'august good';
         $usr->email = 'august@gmail.com';
         $usr->password = bcrypt('admin');
         $usr->birthdate = '1990-08-20';
@@ -22,7 +23,8 @@ class UserTableSeeder extends Seeder
         $usr->save();
 
         User::create(array(
-        	'name' => 'Michele Cantrell',
+            'fullname' => 'michele cantrell',
+            'username' => 'michael',
         	'email' => 'michelle@gmail.com',
         	'password' => bcrypt('editor'),
         	'birthdate' => '1980-10-20',
@@ -31,7 +33,7 @@ class UserTableSeeder extends Seeder
         ));
 
         // Metodo Factory
-        factory(User::class, 100)->create();
+        factory(User::class, 10)->create();
 
     }
 }

@@ -14,6 +14,8 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('name', 'fullname');
+            $table->string('username')->unique()->after('id');
             $table->date('birthdate')->after('password');
             $table->string('gender')->after('birthdate');
             $table->string('photo')->after('gender')->default('imgs/nophoto.png');
@@ -29,6 +31,8 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('fullname', 'name');
+            $table->dropColumn('username');
             $table->dropColumn('birthdate');
             $table->dropColumn('gender');
             $table->dropColumn('photo');
