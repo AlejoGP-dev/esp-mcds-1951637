@@ -15,6 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Enrutamiento por get
 Route::get('hello', function() {
 	return "<h1>Hola Mundo</h2>";
 });
+
+// Enrutamiento con cualquier método (get, post, put, delete)
+Route::any('user/list', function() {
+	$users = App\User::all();
+	return dd($users);
+});
+
+// Enrutamiento a una vista
+Route::view('articles/list', 'articleslist', ['articles' => App\Article::all()]);
+
+// Enrutamiento con Parámetro
+Route::get('user/{id}', function($id) {
+	$user = App\User::find($id);
+	return dd($user);
+});
+
+// Enrutamiento con Nombre
+Route::get('category/list', function() {
+	$categories = App\Category::all();
+	return dd($categories);
+})->name('categorias');
