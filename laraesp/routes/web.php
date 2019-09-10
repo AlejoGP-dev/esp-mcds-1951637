@@ -30,7 +30,7 @@ Route::any('user/list', function() {
 Route::view('articles/list', 'articleslist', ['articles' => App\Article::all()]);
 
 // Enrutamiento con Parámetro
-Route::get('user/{id}', function($id) {
+Route::get('user/show/{id}', function($id) {
 	$user = App\User::find($id);
 	return dd($user);
 });
@@ -40,3 +40,8 @@ Route::get('category/list', function() {
 	$categories = App\Category::all();
 	return dd($categories);
 })->name('categorias');
+
+/*----------------------Rutas del-------------------------------*/
+/*--------------------------USUARIO---------------------------*/ 
+
+Route::resource('user', 'UserController');
