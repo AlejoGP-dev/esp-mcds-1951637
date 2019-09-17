@@ -1,13 +1,17 @@
-<h1>Lista de Artículos</h1>
+<h1>Lista de articulos</h1>
 
-<a href="{{ route('categorias') }}">Lista de Categorías</a>
+<a href="{{ route('categorias') }}">Lista de categorias</a>
 
 @foreach ($articles as $article)
 	<ul>
-		<li><strong>Título: </strong>    {{ $article->name }}</li>
-		<li><strong>Contenido: </strong> {{ $article->content }}</li>
-		<li><strong>Imágen: </strong>    {{ $article->image }}</li>
-		<li><strong>Editor: </strong> <a href="{{ url('user/'.$article->user_id) }}">{{ $article->user->fullname }}</a></li>
-		<li><strong>Categeoría: </strong>{{ $article->category->name }}</li>
+		<li><strong>Título:</strong> 	{{ $article->name }} </li>
+		<li><strong>Contenido:</strong> {{ $article->content }} </li>
+		<li><strong>Imagen:</strong> 	{{ $article->image }} </li>
+		<li><strong>Editor:</strong> 	
+			<a href="{{url('user/'.$article->user_id) }}">
+			{{ $article->user->fullname }}
+			</a> 
+		</li>
+		<li><strong>Categoria:</strong> {{ $article->category->name }} </li>
 	</ul>
 @endforeach

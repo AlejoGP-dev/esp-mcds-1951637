@@ -12,28 +12,30 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $usr = New User;
-        $usr->fullname = 'August Good';
-        $usr->username = 'august good';
-        $usr->email = 'august@gmail.com';
+
+        $usr = new User;
+        $usr->username = 'Kio';
+        $usr->fullname = 'Kio Kusanagi';
+        $usr->email = 'kiokusa@gmail.com';
         $usr->password = bcrypt('admin');
-        $usr->birthdate = '1990-08-20';
+        $usr->birthdate = '1980-02-20';
         $usr->gender = 'Male';
+        /*$usr->photo = 'imgs/photos/kio.png';*/
         $usr->role = 'Admin';
         $usr->save();
 
         User::create(array(
-            'fullname' => 'michele cantrell',
-            'username' => 'michael',
-        	'email' => 'michelle@gmail.com',
+
+            'username' => 'iory',
+        	'fullname' => 'Iory yagami',
+        	'email' => 'ioryya@gmail.com',
         	'password' => bcrypt('editor'),
-        	'birthdate' => '1980-10-20',
-        	'gender' => 'Male',
-        	'role' => 'Editor'
+        	'birthdate' => '1985-10-12',
+        	'gender' => 'Male'
+
         ));
 
-        // Metodo Factory
-        factory(User::class, 10)->create();
-
+        // Factory
+        factory(User::class, 100)->create();
     }
 }

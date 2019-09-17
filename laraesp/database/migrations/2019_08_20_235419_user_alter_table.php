@@ -4,24 +4,26 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterUsersTable extends Migration
+class UserAlterTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('users', function (Blueprint $table) {
+
+    public function up(){
+
+    Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('name', 'fullname');
             $table->string('username')->unique()->after('id');
             $table->date('birthdate')->after('password');
             $table->string('gender')->after('birthdate');
-            $table->string('photo')->after('gender')->default('imgs/nophoto.png');
-            $table->string('role')->after('photo')->default('editor');
+            $table->string('photo')->after('gender')->default('imgs/NoPhoto.png');
+            $table->string('role')->default('editor');
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -32,11 +34,8 @@ class AlterUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('fullname', 'name');
-            $table->dropColumn('username');
-            $table->dropColumn('birthdate');
-            $table->dropColumn('gender');
-            $table->dropColumn('photo');
-            $table->dropColumn('role');
-    });
+            $table->dropColumn(['birthdate', 'gender', 'photo', 'role']);
+        });
     }
+    
 }

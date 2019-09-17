@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 use App\Article;
 
 class ArticlesTableSeeder extends Seeder
@@ -14,22 +13,17 @@ class ArticlesTableSeeder extends Seeder
     public function run()
     {
         Article::create(array(
-        	'name' => 'Polarización',
-        	'content' => 'El país se encuentra polarizado',
-        	'user_id' => 2,
-        	'category_id' => 2
-        ));
-        Article::create(array(
         	'name' => 'Sube el dolar',
-        	'content' => 'El dolar está a $3.600 pesos',
+        	'content' => 'El dolar alcanza los 3600 pesos',
         	'user_id' => 2,
         	'category_id' => 1
         ));
+
         Article::create(array(
-        	'name' => 'Egan, campeón en Francia',
-        	'content' => 'Primer latinoamericano en ganar el Tour de Francia',
+        	'name' => 'El matrimonio del año',
+        	'content' => 'Higuita se vuelve a casar en cartagena con esperanza.',
         	'user_id' => 2,
-        	'category_id' => 3
+        	'category_id' => 2
         ));
     }
 }

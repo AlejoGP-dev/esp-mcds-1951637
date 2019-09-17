@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-Use App\Category;
+
+
+use App\Category;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -13,16 +15,18 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create(array(
-        	'name' => 'Económica',
-        	'description' => 'Esta categoría muestra artículos económicos.'
+        	'name' => 'Economica',
+        	'description' => 'Esta categoria muestra articulos economicos.'
         ));
+
         Category::create(array(
-        	'name' => 'Social',
-        	'description' => 'Esta categoría muestra artículos sociales.'
+        	'name' => 'Economica',
+        	'description' => 'Esta categoria muestra articulos sociales.'
         ));
+
         Category::create(array(
-        	'name' => 'Deportes',
-        	'description' => 'Esta categoría muestra artículos deportivos.'
+        	'name' => 'Economica',
+        	'description' => 'Esta categoria muestra articulos deportivos.'
         ));
     }
 }
