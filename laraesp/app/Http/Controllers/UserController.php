@@ -3,11 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\User;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,29 +44,24 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $user = new User;
-        $user->username = $request->username;
-        $user->fullname = $request->fullname;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->birthdate = $request->birthdate;
-        $user->gender = $request->gender;
-        /*$user->photo = "";*/
-
-        if ($request->hasFile('photo')) {
+       $user = new User;
+       $user->username  = $request->username;
+       $user->fullname  = $request->fullname;
+       $user->email     = $request->email;
+       $user->password  = bcrypt($request->password);
+       $user->birthdate = $request->birthdate;
+       $user->gender    = $request->gender;
+       if($request->hasFile('photo')) {
             $file = time().'.'.$request->photo->extension();
             $request->photo->move(public_path('imgs'), $file);
             $user->photo = "imgs/".$file;
-        }
+       }
+       if($user->save()) {
+            return redirect('users')->with('message', 'El Usuario '.$user->username.' fue creado con exito!');
+       }
 
-        if ($user->save()) {
-            return redirect('users')->with('message', '¡Usuario creado exitosamente!');
-        }
-
-
-       
     }
 
     /**
@@ -91,25 +95,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $user = User::find($id);
-        $user->username = $request->username;
-        $user->fullname = $request->fullname;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->username  = $request->username;
+        $user->fullname  = $request->fullname;
+        $user->email     = $request->email;
         $user->birthdate = $request->birthdate;
-        $user->gender = $request->gender;
-        /*$user->photo = "";*/
-
-        if ($request->hasFile('photo')) {
+        $user->gender    = $request->gender;
+        if($request->hasFile('photo')) {
             $file = time().'.'.$request->photo->extension();
             $request->photo->move(public_path('imgs'), $file);
             $user->photo = "imgs/".$file;
-        }
-
-        if ($user->save()) {
-            return redirect('users')->with('message', '¡Usuario actualizado exitosamente!');
+       }
+        if($user->save()) {
+            return redirect('users')->with('message', 'El Usuario '.$user->username.' fue editado con exito!');
         }
     }
 
@@ -121,6 +121,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if ($user->delete()) {
+            return redirect()->back()->with('message', 'El Usuario '.$user->username.' fue eliminado con exito!');
+        }
     }
 }

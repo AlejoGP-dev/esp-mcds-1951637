@@ -14,29 +14,33 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-//Enrutamiento con cualquier metodo(get/post/put/delete)
-Route::any('user/list', function(){
+// Enrutamiento por get
+Route::get('hello', function() {
+	return '<h1> Hello World! </h1>';
+});
+// Enrutamiento con cualquier método (get/post/put/delete)
+Route::any('user/list', function() {
 	$users = App\User::all();
 	return dd($users);
 });
-
-//Enrutamiento a una vista
-Route::view('articles/list', 'articleslist',['articles' => App\Article::all()]);
-
-//Enrutamiento con parametro
-Route::get('user/show/{id}', function($id){
+// Enrutamiento a una vista
+Route::view('article/list', 'articleslist', ['articles' => App\Article::all()]);
+// Enrutamiento con Parámetro
+Route::get('user/show/{id}', function($id) {
 	$user = App\User::find($id);
 	return dd($user);
 });
-
-//Enrutamiento con nombre
-Route::get('category/list', function(){
+// Enrutamiento con nombre
+Route::get('category/list', function() {
 	$categories = App\Category::all();
 	return dd($categories);
 })->name('categorias');
 
-
-/*---------------------------------------------------------------*/
-/*Users*/
+/* - - - - - - - - - - - - - - - - - - - - - - */
+/* Users - - - - - - - - - - - - - - - - - - - */
 Route::resource('users', 'UserController');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -10,7 +10,8 @@ class Category extends Model
         'name', 'description'
     ];
 
-    public function articles(){
-    	return $this->hasMany('App\Article');
+    public function articles() {
+        return $this->hasMany('App\Article');
     }
+
 }

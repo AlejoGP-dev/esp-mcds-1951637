@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 
-
 use App\Category;
 
 class CategoriesTableSeeder extends Seeder
@@ -14,19 +13,18 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Category::create(array(
-        	'name' => 'Economica',
-        	'description' => 'Esta categoria muestra articulos economicos.'
-        ));
-
-        Category::create(array(
-        	'name' => 'Economica',
-        	'description' => 'Esta categoria muestra articulos sociales.'
-        ));
-
-        Category::create(array(
-        	'name' => 'Economica',
-        	'description' => 'Esta categoria muestra articulos deportivos.'
-        ));
+    	$cat = new Category;
+    	$cat->name = "Económica";
+    	$cat->description = "Esta categoría muestra artículos económicos.";
+        $cat->save();
+        
+ 		Category::create(array(
+ 			'name'         => 'Social',
+ 			'description'  => 'Esta categoría muestra artículos sociales.'
+ 		));
+ 		Category::create(array(
+ 			'name'         => 'Deporte',
+ 			'description'  => 'Esta categoría muestra artículos deportivos.'
+ 		));
     }
 }
