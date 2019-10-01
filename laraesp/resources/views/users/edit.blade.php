@@ -1,4 +1,4 @@
-@extends('layouts-custom.app')
+@extends('layouts.app')
 
 @section('title', 'Editar Usuario')
 
@@ -82,3 +82,4 @@ Limpiar
 </div>
 </div>
 </section>
+@endsection

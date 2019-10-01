@@ -31,7 +31,7 @@
                             <i class="fa fa-users"></i>
                             Módulo de Usuarios
                         </a>
-                         <a href="{{ url('categorias') }}" class="btn btn-outline-dark btn-lg">
+                         <a href="{{ url('categories') }}" class="btn btn-outline-dark btn-lg">
                             <i class="fa fa-list"></i>
                             Módulo de Categorias
                         </a>

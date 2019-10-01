@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Lista de Usuarios')
+@section('title', 'Lista de Categorias')
 
 @section('content')
 	<section class="content mt-5">
@@ -8,12 +8,12 @@
 			<div class="col-md-8 offset-md-2">
 				<h1>
 					<i class="fa fa-users"></i>
-					Lista de Usuarios
+					Lista de Categorias
 				</h1>
 				<hr>
-				<a class="btn btn-success" href="{{ url('users/create') }}">
+				<a class="btn btn-success" href="{{ url('categories/create') }}">
 					<i class="fa fa-plus"></i> 
-					Adicionar Usuario
+					Adicionar Categoria
 				</a>
 				<hr>
 				@if (session('message'))
@@ -27,30 +27,24 @@
 				<table class="table table-bordered table-striped table-hover">
 					<thead class="thead-dark">
 						<tr>
-							<th>Nombre Usuario</th>
-							<th>Nombre Completo</th>
-							<th>Correo Electrónico</th>
-							<th>Foto</th>
+							<th>Nombre Categoría</th>
+							<th>Descripción</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($users as $user)
+						@foreach($categories as $category)
 							<tr>
-								<td>{{ $user->username }}</td>
-								<td>{{ $user->fullname }}</td>
-								<td>{{ $user->email }}</td>
+								<td>{{ $category->name }}</td>
+								<td>{{ $category->description }}</td>
 								<td>
-									<img class="img-thumbnail" src="{{ asset($user->photo) }}" width="40px">
-								</td>
-								<td>
-									<a class="btn btn-light" href="{{ url('users/'.$user->id) }}">
+									<a class="btn btn-light" href="{{ url('categories/'.$category->id) }}">
 										<i class="fa fa-search"></i>
 									</a>
-									<a class="btn btn-light" href="{{ url('users/'.$user->id.'/edit') }}">
+									<a class="btn btn-light" href="{{ url('categories/'.$category->id.'/edit') }}">
 										<i class="fa fa-pencil"></i>
 									</a>
-									<form action="{{ url('users/'.$user->id) }}" method="post" style="display: contents;">
+									<form action="{{ url('categories/'.$category->id) }}" method="post" style="display: contents;">
 										@csrf
 										@method('delete')
 										<button type="button" class="btn btn-danger btn-destroy">

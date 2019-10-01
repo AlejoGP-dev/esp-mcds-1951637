@@ -1,4 +1,4 @@
-@extends('layouts-custom.app')
+@extends('layouts.app')
 
 @section('title', 'Crear Usuario')
 

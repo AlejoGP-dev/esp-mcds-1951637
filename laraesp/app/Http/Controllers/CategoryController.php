@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+
 
 class CategoryController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('categories.index')->with('categories', $categories);
     }
 
     /**
@@ -24,7 +36,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -33,9 +45,18 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+       $category = new Category;
+       $category->name  = $request->name;
+       $category->description  = $request->description;
+       $category->created_at  = $request->created_at;
+       $category->updated_at  = $request->updated_at;
+
+
+        if($category->save()) {
+            return redirect('categories')->with('message', 'La categoría '.$category->name.' fue creada con exito!');
+       }
     }
 
     /**
@@ -44,10 +65,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
-    }
+        $category = Category::find($id);
+        return view('categories.show')->with('category', $category);    }
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +76,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $categories = Category::find($id);
+        return view('categories.edit')->with('categories', $categories);
     }
 
     /**
@@ -67,9 +89,16 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name  = $request->name;
+        $category->description  = $request->description;
+        $category->created_at     = $request->created_at;
+        $category->updated_at = $request->updated_at;
+        if($category->save()) {
+            return redirect('categories')->with('message', 'La categoría '.$category->name.' fue editada con exito!');
+        }
     }
 
     /**
@@ -78,8 +107,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+         $category = Category::find($id);
+        if ($category->delete()) {
+            return redirect()->back()->with('message', 'La categoría '.$category->name.' fue eliminada con exito!');
+        }
     }
 }

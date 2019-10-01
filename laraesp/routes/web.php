@@ -40,6 +40,10 @@ Route::get('category/list', function() {
 /* Users - - - - - - - - - - - - - - - - - - - */
 Route::resource('users', 'UserController');
 
+/* - - - - - - - - - - - - - - - - - - - - - - */
+/* catgories - - - - - - - - - - - - - - - - - - - */
+Route::resource('categories', 'CategoryController');
+
 
 Auth::routes();
 
